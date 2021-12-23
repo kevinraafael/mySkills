@@ -7,6 +7,8 @@ import {
   Platform,
   TouchableOpacity,
 } from 'react-native';
+import {Button} from '../components/Button';
+import {SkillCard} from '../components/SkillCard';
 
 //Será uma aplicação de cadastrar skills semelhante a parte do linkedin
 export function Home() {
@@ -34,20 +36,14 @@ export function Home() {
         style={styles.input}
         placeholder="New Skill"
         placeholderTextColor="#555"
-        onChangeText={setNewSkill}></TextInput>
-      <TouchableOpacity
-        style={styles.button}
-        activeOpacity={0.7}
-        onPress={handleNewAddSkill}>
-        <Text style={styles.buttonText}>Add</Text>
-      </TouchableOpacity>
+        onChangeText={setNewSkill}
+      />
+      <Button onPress={handleNewAddSkill} />
       <Text style={[styles.title, {marginVertical: 50}]}>My Skills</Text>
       {
         // QUando queremos usa Javascript dentro da tag JSX precisamos envolver elas em {}
         myskills.map(skill => (
-          <TouchableOpacity key={skill} style={styles.buttonSkill}>
-            <Text style={styles.skill}>{skill}</Text>
-          </TouchableOpacity>
+          <SkillCard />
         ))
         //Nesse caso o map percorre cada skill dentro da nossa coleção e pega a skill nova que está entre chaves.
         // a Key em skill elimina o warning do react native. Pois ele pede para elemento ali ele pede para ter uma identificação
@@ -61,9 +57,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#121015',
-    paddingHorizontal: 20,
-    paddingVertical: 70,
     paddingHorizontal: 30,
+    paddingVertical: 70,
   },
   title: {
     color: '#fff',
@@ -77,30 +72,6 @@ const styles = StyleSheet.create({
     padding: Platform.OS === 'ios' ? 15 : 10,
     marginTop: 30,
     borderRadius: 7,
-  },
-  button: {
-    backgroundColor: '#A370F7',
-    padding: 15,
-    borderRadius: 7,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#FFF',
-    fontSize: 17,
-    fontWeight: 'bold',
-  },
-  buttonSkill: {
-    backgroundColor: '#1F1E25',
-    padding: 15,
-    borderRadius: 50,
-    alignItems: 'center',
-    marginVertical: 10,
-  },
-  skill: {
-    color: '#FFF',
-
-    fontSize: 22,
-    fontWeight: 'bold',
   },
 });
 // sem colocar o default function podemos uasr o autoimport  , e quando for importado ficara entre {}
