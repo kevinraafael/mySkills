@@ -5,7 +5,7 @@ import {
   StyleSheet,
   TextInput,
   Platform,
-  TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import {Button} from '../components/Button';
 import {SkillCard} from '../components/SkillCard';
@@ -40,15 +40,30 @@ export function Home() {
       />
       <Button onPress={handleNewAddSkill} />
       <Text style={[styles.title, {marginVertical: 50}]}>My Skills</Text>
-      {
+      {/* {
         // QUando queremos usa Javascript dentro da tag JSX precisamos envolver elas em {}
         myskills.map(skill => (
-          <SkillCard />
+          <SkillCard key={skill} skill={skill} />
         ))
         //Nesse caso o map percorre cada skill dentro da nossa coleção e pega a skill nova que está entre chaves.
         // a Key em skill elimina o warning do react native. Pois ele pede para elemento ali ele pede para ter uma identificação
-        // única
-      }
+        // única.
+        //Importante ressaltar que essa forma que foi feita utilizando o map não é recomendada , pois já temos flat list que é bem
+        //melhor para isso e ideal para quando se terá muitos elementos. O flat list carrega só os elementos que estou vendo na tela
+        // o Scrool view +map carregaria tudoooo , causando uma perca de desempenho.
+      } */}
+      <FlatList
+        data={myskills}
+        keyExtractor={item => item}
+        renderItem={({item}) => <SkillCard skill={item} />}
+      />
+      {/*
+        Sobre a flat list acima  ->
+         -> Data é uma propriedade obrigatória onde deve-se informar qual será a nossa coleção
+         -> keyExtractor se refere a qua será o ID dessa coleção. Dessa forma cada item será a nossa chave da coleção
+         -> RenderItem refere - se ao o que eu quero renderizar na minha lista. Ali no caso precisamos desestruturar
+            pois a coleção vem dentro do item.
+        */}
     </View>
   );
 }
