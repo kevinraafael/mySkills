@@ -2,6 +2,7 @@ import React from 'react';
 
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 
+//Toda vez que ele clicar em Onpress , vai chamar a propriedade que está sendo passada pelo parâmetro
 export function Button({onPress}) {
   return (
     <TouchableOpacity
